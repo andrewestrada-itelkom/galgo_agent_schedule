@@ -97,12 +97,14 @@ class GalgoAgentSchedule(models.Model):
                 shift = self.env["galgo.shift.template"].browse(shift_id)
                 agent_id = vals.get("agent_id")
                 if shift.interval_ids:
+                    fecha = vals.get("fecha") or fields.Date.today()
                     interval_vals = [
                         (0, 0, {
                             "hora_ini": line.hora_ini,
                             "hora_fin": line.hora_fin,
                             "shift_id": shift_id,
                             "agent_id": agent_id,
+                            "fecha": fecha,
                         })
                         for line in shift.interval_ids
                     ]
