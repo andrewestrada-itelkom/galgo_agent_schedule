@@ -111,7 +111,7 @@ class GalgoAgentSchedule(models.Model):
                     vals["interval_ids"] = interval_vals
         records = super().create(vals_list)
         for rec in records.filtered("interval_ids"):
-            rec.interval_ids.recompute()
+            rec.interval_ids.flush_recordset()
         return records
 
     @api.model
