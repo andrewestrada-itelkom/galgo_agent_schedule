@@ -12,7 +12,6 @@
                       date_stop="datetime_end"
                       color="color"
                       mode="month"
-                      event_open_popup="True"
                       quick_add="False">
                 <field name="agent_id" filters="1"/>
                 <field name="shift_id" filters="1"/>
