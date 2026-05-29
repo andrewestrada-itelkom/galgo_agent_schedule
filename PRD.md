@@ -421,7 +421,7 @@ galgo_agent_schedule/
 
 ## 12. Goals
 
-- [ ] **G-1**: Unificar vista calendario para turnos sencillos y partidos — dejar SOLO `galgo_agent_schedule_view_calendar` (usando `interval_ids` para mostrar bloques en calendario de intervalos). Eliminar `galgo_agent_schedule_interval_view_calendar` y el menú separado "Ver Intervalos (Turnos Partidos)".
+- [x] **G-1**: Unificar vista calendario para turnos sencillos y partidos — dejar SOLO `galgo_agent_schedule_view_calendar` (usando `interval_ids` para mostrar bloques en calendario de intervalos). Eliminar `galgo_agent_schedule_interval_view_calendar` y el menú separado "Ver Intervalos (Turnos Partidos)". ✓ (May 2026)
 
 ---
 

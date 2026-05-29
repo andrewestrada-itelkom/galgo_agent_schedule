@@ -15,28 +15,19 @@
                     <group>
                         <group>
                             <field name="code"/>
-                            <field name="hora_ini"/>
-                            <field name="hora_fin"/>
-                        </group>
-                        <group>
-                            <field name="cruza_medianoche"/>
-                            <field name="duracion_horas" widget="float_time"/>
                             <field name="color" widget="color_picker"/>
                         </group>
-                    </group>
-                    <group string="Áreas Asignadas">
-                        <field name="area_ids" widget="many2many_tags"
-                               placeholder="Vacío = todas las áreas"/>
+                        <group>
+                            <field name="area_ids" widget="many2many_tags"
+                                   placeholder="Vacío = todas las áreas"/>
+                        </group>
                     </group>
                     <notebook>
-                        <page string="Intervalos (Turno Partido)" name="intervals">
-                            <group>
-                                <p class="text-muted">
-                                    Si define intervalos aquí, se usarán para calcular la duración total 
-                                    y se mostrarán como bloques separados en el calendario. 
-                                    Si lo deja vacío, se usará el horario principal (Hora Inicio - Hora Fin).
-                                </p>
-                            </group>
+                        <page string="Intervalos de Horario" name="intervals">
+                            <p class="text-muted">
+                                Definir los bloques de horario del turno. Cada bloque aparece
+                                como un evento separado en el calendario.
+                            </p>
                             <field name="interval_ids">
                                 <tree editable="bottom">
                                     <field name="hora_ini"/>
@@ -58,10 +49,6 @@
             <tree string="Plantillas de Turno">
                 <field name="name"/>
                 <field name="code"/>
-                <field name="hora_ini"/>
-                <field name="hora_fin"/>
-                <field name="cruza_medianoche"/>
-                <field name="duracion_horas" widget="float_time"/>
                 <field name="color" widget="color_picker" readonly="1"/>
             </tree>
         </field>
@@ -75,8 +62,6 @@
             <search string="Buscar Plantilla de Turno">
                 <field name="name"/>
                 <field name="code"/>
-                <filter name="filter_nocturno" string="Nocturnos" domain="[('cruza_medianoche', '=', True)]"/>
-                <filter name="filter_diurno" string="Diurnos" domain="[('cruza_medianoche', '=', False)]"/>
             </search>
         </field>
     </record>

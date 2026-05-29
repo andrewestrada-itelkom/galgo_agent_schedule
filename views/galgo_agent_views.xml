@@ -36,8 +36,6 @@
                                 <tree string="Historial de Turnos">
                                     <field name="fecha"/>
                                     <field name="shift_id"/>
-                                    <field name="hora_ini"/>
-                                    <field name="hora_fin"/>
                                     <field name="state"/>
                                     <field name="notas"/>
                                 </tree>
