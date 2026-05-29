@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredar vista de configuración para añadir campos del módulo -->
+    <record id="res_config_settings_view_form_galgo" model="ir.ui.view">
+        <field name="name">res.config.settings.form.galgo.schedule</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Gestión de Turnos" string="Gestión de Turnos">
+                    <h2>Gestión de Turnos</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="galgo_schedule_api_key"/>
+                                <div class="text-muted">Clave API para integraciones externas como n8n.</div>
+                                <div class="content-group mt16">
+                                    <field name="galgo_schedule_api_key" placeholder="Ingrese la clave API para endpoints externos"/>
+                                    <button name="action_generate_galgo_schedule_api_key"
+                                            type="object"
+                                            string="Generar API Key"
+                                            class="btn-secondary mt8"
+                                            icon="fa-refresh"
+                                            help="Genera una nueva API Key aleatoria segura."/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="galgo_schedule_timezone"/>
+                                <div class="text-muted">Zona horaria por defecto para cálculos de turnos.</div>
+                                <div class="content-group mt16">
+                                    <field name="galgo_schedule_timezone" placeholder="America/Bogota"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label for="galgo_schedule_mensaje_fuera_horario"/>
+                                <div class="text-muted">Mensaje para WhatsApp cuando no hay agentes disponibles.</div>
+                                <div class="content-group mt16">
+                                    <field name="galgo_schedule_mensaje_fuera_horario" placeholder="Mensaje WhatsApp cuando no hay agentes disponibles"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Acción para abrir configuración -->
+    <record id="galgo_schedule_config_action" model="ir.actions.act_url">
+        <field name="name">Ajustes de Turnos</field>
+        <field name="url">/web#action=base.res_config_setting_act_window</field>
+        <field name="target">self</field>
+    </record>
+</odoo>

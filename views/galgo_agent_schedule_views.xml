@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================================================
+         VISTA CALENDARIO PRINCIPAL — muestra intervalos como eventos
+         Un calendario unificado para turnos simples y partidos.
+         ============================================================ -->
+    <record id="galgo_agent_schedule_view_calendar" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.calendar</field>
+        <field name="model">galgo.agent.schedule.interval</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendario de Turnos"
+                      date_start="datetime_start"
+                      date_stop="datetime_end"
+                      color="color"
+                      mode="month"
+                      event_open_popup="True"
+                      quick_add="True">
+                <field name="agent_id" filters="1"/>
+                <field name="shift_id" filters="1"/>
+                <field name="area_id" filters="1"/>
+                <field name="nivel_id" filters="1"/>
+                <field name="hora_ini"/>
+                <field name="hora_fin"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vista Lista para Intervalos (para crear desde menú) -->
+    <record id="galgo_agent_schedule_interval_view_tree" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.interval.tree</field>
+        <field name="model">galgo.agent.schedule.interval</field>
+        <field name="arch" type="xml">
+            <tree string="Intervalos de Turno">
+                <field name="agent_id"/>
+                <field name="fecha"/>
+                <field name="shift_id"/>
+                <field name="hora_ini"/>
+                <field name="hora_fin"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Formulario para Intervalos -->
+    <record id="galgo_agent_schedule_interval_view_form" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.interval.form</field>
+        <field name="model">galgo.agent.schedule.interval</field>
+        <field name="arch" type="xml">
+            <form string="Detalle de Turno">
+                <sheet>
+                    <div class="alert alert-info" role="alert" attrs="{'invisible': [('schedule_id', '!=', False)]}">
+                        Complete los datos para generar el turno y sus intervalos automáticamente.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="schedule_id" attrs="{'invisible': [('schedule_id', '=', False)]}" readonly="1"/>
+                            <field name="agent_id" attrs="{'readonly': [('schedule_id', '!=', False)]}" required="1"/>
+                            <field name="fecha" attrs="{'readonly': [('schedule_id', '!=', False)]}"/>
+                            <field name="shift_id" attrs="{'readonly': [('schedule_id', '!=', False)]}" required="1"/>
+                            <field name="color" widget="color_picker" readonly="1" attrs="{'invisible': [('shift_id', '=', False)]}"/>
+                        </group>
+                        <group attrs="{'invisible': [('schedule_id', '=', False)]}">
+                            <field name="hora_ini" readonly="1"/>
+                            <field name="hora_fin" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_open_schedule" type="object" string="Ver Turno Completo" class="oe_highlight"
+                            attrs="{'invisible': [('schedule_id', '=', False)]}"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================
+         VISTAS DEL SCHEDULE (para crear/editar schedules via form)
+         No se usan para calendario, solo para el form completo.
+         ============================================================ -->
+
+    <!-- Vista Lista -->
+    <record id="galgo_agent_schedule_view_list" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.list</field>
+        <field name="model">galgo.agent.schedule</field>
+        <field name="arch" type="xml">
+            <tree string="Turnos"
+                  decoration-info="state == 'draft'"
+                  decoration-success="state == 'confirmado'">
+                <field name="fecha"/>
+                <field name="agent_id"/>
+                <field name="area_id"/>
+                <field name="nivel_id"/>
+                <field name="shift_id"/>
+                <field name="hora_ini"/>
+                <field name="hora_fin"/>
+                <field name="duracion_horas" widget="float_time"/>
+                <field name="es_nocturno"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-success="state == 'confirmado'"/>
+                <field name="notas"/>
+                <button name="action_confirm" type="object"
+                        string="Confirmar" icon="fa-check"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Búsqueda -->
+    <record id="galgo_agent_schedule_view_search" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.search</field>
+        <field name="model">galgo.agent.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Turno">
+                <field name="fecha"/>
+                <field name="agent_id"/>
+                <field name="area_id"/>
+                <field name="nivel_id"/>
+                <field name="shift_id"/>
+                <field name="state"/>
+                <filter name="filter_draft" string="Borradores" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_confirmado" string="Confirmados" domain="[('state', '=', 'confirmado')]"/>
+                <filter name="filter_nocturno" string="Turnos Nocturnos" domain="[('es_nocturno', '=', True)]"/>
+                <separator/>
+                <filter name="filter_today" string="Hoy" domain="[('fecha', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_area" string="Área" context="{'group_by': 'area_id'}"/>
+                    <filter name="group_shift" string="Turno" context="{'group_by': 'shift_id'}"/>
+                    <filter name="group_fecha_week" string="Fecha (Semana)" context="{'group_by': 'fecha:week'}"/>
+                    <filter name="group_fecha_month" string="Fecha (Mes)" context="{'group_by': 'fecha:month'}"/>
+                    <filter name="group_state" string="Estado" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vista Formulario -->
+    <record id="galgo_agent_schedule_view_form" model="ir.ui.view">
+        <field name="name">galgo.agent.schedule.form</field>
+        <field name="model">galgo.agent.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Turno Asignado">
+                <header>
+                    <button name="action_confirm" type="object"
+                            string="Confirmar" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_draft" type="object"
+                            string="Volver a Borrador"
+                            attrs="{'invisible': [('state', '!=', 'confirmado')]}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmado"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="agent_id" attrs="{'readonly': [('state', '=', 'confirmado')]}"/>
+                            <field name="fecha" attrs="{'readonly': [('state', '=', 'confirmado')]}"/>
+                            <label for="shift_id"/>
+                            <div class="o_row">
+                                <field name="shift_id" attrs="{'readonly': [('state', '=', 'confirmado')]}"/>
+                                <field name="color" widget="color_picker" readonly="1" attrs="{'invisible': [('shift_id', '=', False)]}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="hora_ini" attrs="{'readonly': [('state', '=', 'confirmado')]}"/>
+                            <field name="hora_fin" attrs="{'readonly': [('state', '=', 'confirmado')]}"/>
+                            <field name="duracion_horas" widget="float_time"/>
+                            <field name="es_nocturno"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Intervalos de Horario" name="intervals">
+                            <field name="interval_ids" attrs="{'readonly': [('state', '=', 'confirmado')]}">
+                                <tree editable="bottom">
+                                    <field name="hora_ini"/>
+                                    <field name="hora_fin"/>
+                                    <field name="datetime_start" invisible="1"/>
+                                    <field name="datetime_end" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notas" name="notes">
+                            <field name="notas" placeholder="Observaciones sobre el turno..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============================================================
+         ACCIONES
+         ============================================================ -->
+
+    <!-- Acción: Calendario de Turnos (intervalos) — PRINCIPAL -->
+    <record id="galgo_agent_schedule_action" model="ir.actions.act_window">
+        <field name="name">Calendario de Turnos</field>
+        <field name="res_model">galgo.agent.schedule.interval</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Asigna turnos a tus agentes.
+            </p>
+        </field>
+    </record>
+
+    <!-- Acción: Gestión de Turnos (lista/form de schedules) -->
+    <record id="galgo_agent_schedule_action_form" model="ir.actions.act_window">
+        <field name="name">Gestión de Turnos</field>
+        <field name="res_model">galgo.agent.schedule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Acción: Calendario de Schedules (para ver el form completo) -->
+    <record id="galgo_agent_schedule_action_calendar" model="ir.actions.act_window">
+        <field name="name">Calendario Completo</field>
+        <field name="res_model">galgo.agent.schedule</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ver turnos completos con todos los detalles.
+            </p>
+        </field>
+    </record>
+
+    <!-- Acción: Lista de Turnos -->
+    <record id="galgo_agent_schedule_action_list" model="ir.actions.act_window">
+        <field name="name">Lista de Turnos</field>
+        <field name="res_model">galgo.agent.schedule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Acción masiva: Confirmar seleccionados -->
+    <record id="galgo_agent_schedule_action_confirm_selected" model="ir.actions.server">
+        <field name="name">Confirmar turnos seleccionados</field>
+        <field name="model_id" ref="model_galgo_agent_schedule"/>
+        <field name="binding_model_id" ref="model_galgo_agent_schedule"/>
+        <field name="binding_view_types">tree</field>
+        <field name="state">code</field>
+        <field name="code">records.action_confirm()</field>
+    </record>
+</odoo>

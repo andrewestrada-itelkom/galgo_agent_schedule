@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Plantillas de turno por defecto — todas usan intervalos -->
+
+        <!-- Mañana: 06:00 - 14:00 (un solo bloque) -->
+        <record id="galgo_shift_manana" model="galgo.shift.template">
+            <field name="name">Mañana</field>
+            <field name="code">manana</field>
+            <field name="color">3</field>
+        </record>
+        <!-- Intervalo para Mañana -->
+        <record id="galgo_shift_manana_int" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_manana"/>
+            <field name="hora_ini">06:00</field>
+            <field name="hora_fin">14:00</field>
+        </record>
+
+        <!-- Día: 08:00 - 18:00 (un solo bloque) -->
+        <record id="galgo_shift_dia" model="galgo.shift.template">
+            <field name="name">Día</field>
+            <field name="code">dia</field>
+            <field name="color">4</field>
+        </record>
+        <record id="galgo_shift_dia_int" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_dia"/>
+            <field name="hora_ini">08:00</field>
+            <field name="hora_fin">18:00</field>
+        </record>
+
+        <!-- Noche: 18:00 - 06:00 (cruza medianoche, un bloque) -->
+        <record id="galgo_shift_noche" model="galgo.shift.template">
+            <field name="name">Noche</field>
+            <field name="code">noche</field>
+            <field name="color">5</field>
+        </record>
+        <record id="galgo_shift_noche_int" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_noche"/>
+            <field name="hora_ini">18:00</field>
+            <field name="hora_fin">06:00</field>
+        </record>
+
+        <!-- Oficina: 08:00-12:00 y 14:00-18:00 (turno partido con 2 bloques) -->
+        <record id="galgo_shift_oficina" model="galgo.shift.template">
+            <field name="name">Oficina</field>
+            <field name="code">oficina</field>
+            <field name="color">6</field>
+        </record>
+        <record id="galgo_shift_oficina_int1" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_oficina"/>
+            <field name="hora_ini">08:00</field>
+            <field name="hora_fin">12:00</field>
+        </record>
+        <record id="galgo_shift_oficina_int2" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_oficina"/>
+            <field name="hora_ini">14:00</field>
+            <field name="hora_fin">18:00</field>
+        </record>
+
+        <!-- Medio tiempo: 08:00 - 13:00 (un solo bloque) -->
+        <record id="galgo_shift_medio" model="galgo.shift.template">
+            <field name="name">Medio tiempo</field>
+            <field name="code">medio_tiempo</field>
+            <field name="color">7</field>
+        </record>
+        <record id="galgo_shift_medio_int" model="galgo.shift.interval">
+            <field name="shift_id" ref="galgo_agent_schedule.galgo_shift_medio"/>
+            <field name="hora_ini">08:00</field>
+            <field name="hora_fin">13:00</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario Área -->
+    <record id="galgo_area_view_form" model="ir.ui.view">
+        <field name="name">galgo.area.form</field>
+        <field name="model">galgo.area</field>
+        <field name="arch" type="xml">
+            <form string="Área">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del área"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="color"/>
+                            <field name="responsable_id"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Descripción">
+                        <field name="descripcion" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista Área -->
+    <record id="galgo_area_view_list" model="ir.ui.view">
+        <field name="name">galgo.area.list</field>
+        <field name="model">galgo.area</field>
+        <field name="arch" type="xml">
+            <tree string="Áreas">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="responsable_id"/>
+                <field name="active" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Búsqueda Área -->
+    <record id="galgo_area_view_search" model="ir.ui.view">
+        <field name="name">galgo.area.search</field>
+        <field name="model">galgo.area</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Área">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="responsable_id"/>
+                <filter name="filter_active" string="Activos" domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Archivados" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción Área -->
+    <record id="galgo_area_action" model="ir.actions.act_window">
+        <field name="name">Áreas</field>
+        <field name="res_model">galgo.area</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un área nueva
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menú Principal -->
+    <menuitem id="galgo_schedule_menu_root"
+              name="Gestión de Turnos"
+              sequence="40"/>
+
+    <!-- Sub-menús: Operaciones -->
+    <menuitem id="galgo_schedule_menu_operations"
+              name="Operaciones"
+              parent="galgo_schedule_menu_root"
+              sequence="10"/>
+
+<menuitem id="galgo_schedule_menu_calendar"
+              name="Calendario de Turnos"
+              parent="galgo_schedule_menu_operations"
+              action="galgo_agent_schedule_action"
+              sequence="10"/>
+
+    <menuitem id="galgo_schedule_menu_list"
+              name="Lista de Turnos"
+              parent="galgo_schedule_menu_operations"
+              action="galgo_agent_schedule_action_list"
+              sequence="20"/>
+
+    <menuitem id="galgo_schedule_menu_wizard"
+              name="Generar Turnos"
+              parent="galgo_schedule_menu_operations"
+              action="galgo_schedule_wizard_action"
+              sequence="30"/>
+
+    <!-- Sub-menús: Configuración -->
+    <menuitem id="galgo_schedule_menu_config"
+              name="Configuración"
+              parent="galgo_schedule_menu_root"
+              sequence="50"/>
+
+    <menuitem id="galgo_schedule_menu_agents"
+              name="Agentes"
+              parent="galgo_schedule_menu_config"
+              action="galgo_agent_action"
+              sequence="10"/>
+
+    <menuitem id="galgo_schedule_menu_areas"
+              name="Áreas"
+              parent="galgo_schedule_menu_config"
+              action="galgo_area_action"
+              sequence="20"
+              groups="galgo_agent_schedule.group_admin"/>
+
+    <menuitem id="galgo_schedule_menu_niveles"
+              name="Niveles de Atención"
+              parent="galgo_schedule_menu_config"
+              action="galgo_nivel_atencion_action"
+              sequence="30"
+              groups="galgo_agent_schedule.group_admin"/>
+
+    <menuitem id="galgo_schedule_menu_shift_templates"
+              name="Plantillas de Turno"
+              parent="galgo_schedule_menu_config"
+              action="galgo_shift_template_action"
+              sequence="40"/>
+
+    <menuitem id="galgo_schedule_menu_settings"
+              name="Ajustes"
+              parent="galgo_schedule_menu_config"
+              action="galgo_schedule_config_action"
+              sequence="50"
+              groups="galgo_agent_schedule.group_manager"/>
+</odoo>

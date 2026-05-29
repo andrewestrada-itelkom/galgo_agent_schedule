@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario Agente -->
+    <record id="galgo_agent_view_form" model="ir.ui.view">
+        <field name="name">galgo.agent.form</field>
+        <field name="model">galgo.agent</field>
+        <field name="arch" type="xml">
+            <form string="Agente">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del agente"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Datos Básicos">
+                            <field name="area_id"/>
+                            <field name="nivel_id"/>
+                            <field name="user_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Contacto y Chatwoot">
+                            <field name="chatwoot_agent_id"/>
+                            <field name="telefono"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                    <group string="Notas">
+                        <field name="notas" nolabel="1" colspan="2" placeholder="Notas adicionales..."/>
+                    </group>
+                    <notebook>
+                        <page string="Historial de Turnos" name="schedule_history">
+                            <field name="schedule_ids" nolabel="1" readonly="1">
+                                <tree string="Historial de Turnos">
+                                    <field name="fecha"/>
+                                    <field name="shift_id"/>
+                                    <field name="hora_ini"/>
+                                    <field name="hora_fin"/>
+                                    <field name="state"/>
+                                    <field name="notas"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista Agente -->
+    <record id="galgo_agent_view_list" model="ir.ui.view">
+        <field name="name">galgo.agent.list</field>
+        <field name="model">galgo.agent</field>
+        <field name="arch" type="xml">
+            <tree string="Agentes">
+                <field name="name"/>
+                <field name="area_id"/>
+                <field name="nivel_id"/>
+                <field name="chatwoot_agent_id"/>
+                <field name="telefono"/>
+                <field name="email"/>
+                <field name="active" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Búsqueda Agente -->
+    <record id="galgo_agent_view_search" model="ir.ui.view">
+        <field name="name">galgo.agent.search</field>
+        <field name="model">galgo.agent</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Agente">
+                <field name="name"/>
+                <field name="area_id"/>
+                <field name="nivel_id"/>
+                <field name="chatwoot_agent_id"/>
+                <filter name="filter_active" string="Activos" domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Archivados" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_area" string="Área" context="{'group_by': 'area_id'}"/>
+                    <filter name="group_nivel" string="Nivel" context="{'group_by': 'nivel_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción Agente -->
+    <record id="galgo_agent_action" model="ir.actions.act_window">
+        <field name="name">Agentes</field>
+        <field name="res_model">galgo.agent</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un agente nuevo
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Agentes demo -->
+
+        <!-- Jhostin Epalza — chatwoot_id=2, área=NOC, sin nivel -->
+        <record id="galgo_agent_jhostin" model="galgo.agent">
+            <field name="name">Jhostin Epalza</field>
+            <field name="chatwoot_agent_id">2</field>
+            <field name="area_id" ref="galgo_area_noc"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Kiara Pertuz — chatwoot_id=7, área=NOC, nivel=Nivel 2 -->
+        <record id="galgo_agent_kiara" model="galgo.agent">
+            <field name="name">Kiara Pertuz</field>
+            <field name="chatwoot_agent_id">7</field>
+            <field name="area_id" ref="galgo_area_noc"/>
+            <field name="nivel_id" ref="galgo_nivel_2"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Gracia Arias — chatwoot_id=11, área=NOC, nivel=Nivel 1 -->
+        <record id="galgo_agent_gracia" model="galgo.agent">
+            <field name="name">Gracia Arias</field>
+            <field name="chatwoot_agent_id">11</field>
+            <field name="area_id" ref="galgo_area_noc"/>
+            <field name="nivel_id" ref="galgo_nivel_1"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Steven Olascoagas — chatwoot_id=9, área=NOC, nivel=Nivel 1 -->
+        <record id="galgo_agent_steven" model="galgo.agent">
+            <field name="name">Steven Olascoagas</field>
+            <field name="chatwoot_agent_id">9</field>
+            <field name="area_id" ref="galgo_area_noc"/>
+            <field name="nivel_id" ref="galgo_nivel_1"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Karol Vieira — chatwoot_id=3, área=Ventas, sin nivel -->
+        <record id="galgo_agent_karol" model="galgo.agent">
+            <field name="name">Karol Vieira</field>
+            <field name="chatwoot_agent_id">3</field>
+            <field name="area_id" ref="galgo_area_ventas"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Jaiver Palacios — chatwoot_id=8, área=NOC, nivel=Nivel 1 -->
+        <record id="galgo_agent_jaiver" model="galgo.agent">
+            <field name="name">Jaiver Palacios</field>
+            <field name="chatwoot_agent_id">8</field>
+            <field name="area_id" ref="galgo_area_noc"/>
+            <field name="nivel_id" ref="galgo_nivel_1"/>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

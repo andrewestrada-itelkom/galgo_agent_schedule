@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Áreas por defecto -->
+        <record id="galgo_area_noc" model="galgo.area">
+            <field name="name">NOC</field>
+            <field name="code">noc</field>
+            <field name="color">1</field>
+            <field name="descripcion">Network Operations Center</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="galgo_area_ventas" model="galgo.area">
+            <field name="name">Ventas</field>
+            <field name="code">ventas</field>
+            <field name="color">4</field>
+            <field name="descripcion">Equipo de Ventas</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

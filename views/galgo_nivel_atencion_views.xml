@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario Nivel de Atención -->
+    <record id="galgo_nivel_atencion_view_form" model="ir.ui.view">
+        <field name="name">galgo.nivel.atencion.form</field>
+        <field name="model">galgo.nivel.atencion</field>
+        <field name="arch" type="xml">
+            <form string="Nivel de Atención">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del nivel"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="secuencia"/>
+                        </group>
+                        <group>
+                            <field name="area_id"
+                                   string="Área"
+                                   placeholder="Vacío = todas las áreas"/>
+                            <field name="color"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista Nivel -->
+    <record id="galgo_nivel_atencion_view_list" model="ir.ui.view">
+        <field name="name">galgo.nivel.atencion.list</field>
+        <field name="model">galgo.nivel.atencion</field>
+        <field name="arch" type="xml">
+            <tree string="Niveles de Atención">
+                <field name="secuencia" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="area_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Búsqueda Nivel -->
+    <record id="galgo_nivel_atencion_view_search" model="ir.ui.view">
+        <field name="name">galgo.nivel.atencion.search</field>
+        <field name="model">galgo.nivel.atencion</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Nivel de Atención">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="area_id"/>
+                <filter name="filter_global" string="Global (sin área)" domain="[('area_id', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción Nivel -->
+    <record id="galgo_nivel_atencion_action" model="ir.actions.act_window">
+        <field name="name">Niveles de Atención</field>
+        <field name="res_model">galgo.nivel.atencion</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un nivel de atención nuevo
+            </p>
+        </field>
+    </record>
+</odoo>

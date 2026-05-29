@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Niveles de atención por defecto -->
+        <record id="galgo_nivel_1" model="galgo.nivel.atencion">
+            <field name="name">Nivel 1</field>
+            <field name="code">nivel1</field>
+            <field name="secuencia">1</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="galgo_nivel_2" model="galgo.nivel.atencion">
+            <field name="name">Nivel 2</field>
+            <field name="code">nivel2</field>
+            <field name="secuencia">2</field>
+            <field name="color">3</field>
+        </record>
+    </data>
+</odoo>

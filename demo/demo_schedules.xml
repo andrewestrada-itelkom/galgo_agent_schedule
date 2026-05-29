@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--
+            Turnos de ejemplo para la semana actual del área NOC.
+            Datos demo - se instalan solo con demo data.
+        -->
+
+        <!-- Lunes (hoy) -->
+        <record id="demo_schedule_mon_jhostin" model="galgo.agent.schedule">
+            <field name="fecha" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_jhostin"/>
+            <field name="shift_id" ref="galgo_shift_dia"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_mon_kiara" model="galgo.agent.schedule">
+            <field name="fecha" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_kiara"/>
+            <field name="shift_id" ref="galgo_shift_manana"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_mon_gracia" model="galgo.agent.schedule">
+            <field name="fecha" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_gracia"/>
+            <field name="shift_id" ref="galgo_shift_noche"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_mon_steven" model="galgo.agent.schedule">
+            <field name="fecha" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_steven"/>
+            <field name="shift_id" ref="galgo_shift_oficina"/>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- Martes -->
+        <record id="demo_schedule_tue_jhostin" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_jhostin"/>
+            <field name="shift_id" ref="galgo_shift_noche"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_tue_kiara" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_kiara"/>
+            <field name="shift_id" ref="galgo_shift_dia"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_tue_jaiver" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_jaiver"/>
+            <field name="shift_id" ref="galgo_shift_manana"/>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- Miércoles -->
+        <record id="demo_schedule_wed_jhostin" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_jhostin"/>
+            <field name="shift_id" ref="galgo_shift_manana"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_wed_gracia" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_gracia"/>
+            <field name="shift_id" ref="galgo_shift_dia"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <!-- Jueves -->
+        <record id="demo_schedule_thu_steven" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=3)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_steven"/>
+            <field name="shift_id" ref="galgo_shift_noche"/>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="demo_schedule_thu_kiara" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=3)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_kiara"/>
+            <field name="shift_id" ref="galgo_shift_oficina"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <!-- Viernes -->
+        <record id="demo_schedule_fri_jaiver" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=4)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_jaiver"/>
+            <field name="shift_id" ref="galgo_shift_dia"/>
+            <field name="state">confirmado</field>
+        </record>
+
+        <record id="demo_schedule_fri_gracia" model="galgo.agent.schedule">
+            <field name="fecha" eval="(DateTime.now() + timedelta(days=4)).strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_gracia"/>
+            <field name="shift_id" ref="galgo_shift_noche"/>
+            <field name="state">draft</field>
+        </record>
+
+        <!-- Ventas: Karol turno oficina hoy -->
+        <record id="demo_schedule_mon_karol" model="galgo.agent.schedule">
+            <field name="fecha" eval="time.strftime('%Y-%m-%d')"/>
+            <field name="agent_id" ref="galgo_agent_karol"/>
+            <field name="shift_id" ref="galgo_shift_oficina"/>
+            <field name="state">confirmado</field>
+        </record>
+    </data>
+</odoo>

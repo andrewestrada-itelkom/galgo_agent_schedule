@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario del Wizard -->
+    <record id="galgo_schedule_wizard_view_form" model="ir.ui.view">
+        <field name="name">galgo.schedule.wizard.form</field>
+        <field name="model">galgo.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generar Turnos en Lote">
+                <group>
+                    <group>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
+                    </group>
+                    <group>
+                        <field name="area_id"/>
+                    </group>
+                </group>
+                <group string="Configuración de Agentes y Turnos">
+                    <field name="lineas_ids" nolabel="1" colspan="2">
+                        <tree editable="bottom" string="Líneas">
+                            <field name="agent_id"
+                                   domain="[('area_id', '=', parent.area_id)]"/>
+                            <field name="shift_id"
+                                   domain="['|', ('area_ids', '=', False), ('area_ids', 'in', [parent.area_id])]"/>
+                            <field name="dias_semana" widget="many2many_tags"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="action_generate" type="object"
+                            string="Generar Turnos" class="oe_highlight"/>
+                    <button string="Cancelar" class="oe_link"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción del Wizard -->
+    <record id="galgo_schedule_wizard_action" model="ir.actions.act_window">
+        <field name="name">Generar Turnos</field>
+        <field name="res_model">galgo.schedule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

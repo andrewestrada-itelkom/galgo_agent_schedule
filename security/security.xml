@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Categoría del módulo para los grupos (DEBE estar primero) -->
+    <record id="module_category_galgo_schedule" model="ir.module.category">
+        <field name="name">Galgo Gestión de Turnos</field>
+        <field name="sequence">40</field>
+    </record>
+
+    <!-- Grupo: Viewer (solo lectura) -->
+    <record id="group_viewer" model="res.groups">
+        <field name="name">Visor de Turnos</field>
+        <field name="category_id" ref="galgo_agent_schedule.module_category_galgo_schedule"/>
+    </record>
+
+    <!-- Grupo: User (lectura + crear/editar propios) -->
+    <record id="group_user" model="res.groups">
+        <field name="name">Usuario de Turnos</field>
+        <field name="category_id" ref="galgo_agent_schedule.module_category_galgo_schedule"/>
+        <field name="implied_ids" eval="[(4, ref('galgo_agent_schedule.group_viewer'))]"/>
+    </record>
+
+    <!-- Grupo: Manager (CRUD completo + wizard + config) -->
+    <record id="group_manager" model="res.groups">
+        <field name="name">Gestor de Turnos</field>
+        <field name="category_id" ref="galgo_agent_schedule.module_category_galgo_schedule"/>
+        <field name="implied_ids" eval="[(4, ref('galgo_agent_schedule.group_user'))]"/>
+    </record>
+
+    <!-- Grupo: Admin (igual que manager + gestión de áreas y niveles) -->
+    <record id="group_admin" model="res.groups">
+        <field name="name">Administrador de Turnos</field>
+        <field name="category_id" ref="galgo_agent_schedule.module_category_galgo_schedule"/>
+        <field name="implied_ids" eval="[(4, ref('galgo_agent_schedule.group_manager'))]"/>
+    </record>
+
+    <!-- Reglas de registro -->
+
+    <!-- Viewer: solo lectura de schedules -->
+    <record id="galgo_schedule_viewer_rule" model="ir.rule">
+        <field name="name">Visor: Solo lectura de turnos</field>
+        <field name="model_id" ref="model_galgo_agent_schedule"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('galgo_agent_schedule.group_viewer'))]"/>
+    </record>
+
+    <!-- User: puede crear/editar sus propios schedules -->
+    <record id="galgo_schedule_user_rule" model="ir.rule">
+        <field name="name">Usuario: Editar turnos propios</field>
+        <field name="model_id" ref="model_galgo_agent_schedule"/>
+        <field name="domain_force">[('agent_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="groups" eval="[(4, ref('galgo_agent_schedule.group_user'))]"/>
+    </record>
+
+    <!-- Manager/Admin: acceso completo a schedules -->
+    <record id="galgo_schedule_manager_rule" model="ir.rule">
+        <field name="name">Gestor/Admin: Acceso completo</field>
+        <field name="model_id" ref="model_galgo_agent_schedule"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="groups" eval="[(4, ref('galgo_agent_schedule.group_manager')), (4, ref('galgo_agent_schedule.group_admin'))]"/>
+    </record>
+</odoo>

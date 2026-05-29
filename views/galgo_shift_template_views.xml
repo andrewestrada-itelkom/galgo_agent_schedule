@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario Plantilla de Turno -->
+    <record id="galgo_shift_template_view_form" model="ir.ui.view">
+        <field name="name">galgo.shift.template.form</field>
+        <field name="model">galgo.shift.template</field>
+        <field name="arch" type="xml">
+            <form string="Plantilla de Turno">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nombre del turno"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="hora_ini"/>
+                            <field name="hora_fin"/>
+                        </group>
+                        <group>
+                            <field name="cruza_medianoche"/>
+                            <field name="duracion_horas" widget="float_time"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <group string="Áreas Asignadas">
+                        <field name="area_ids" widget="many2many_tags"
+                               placeholder="Vacío = todas las áreas"/>
+                    </group>
+                    <notebook>
+                        <page string="Intervalos (Turno Partido)" name="intervals">
+                            <group>
+                                <p class="text-muted">
+                                    Si define intervalos aquí, se usarán para calcular la duración total 
+                                    y se mostrarán como bloques separados en el calendario. 
+                                    Si lo deja vacío, se usará el horario principal (Hora Inicio - Hora Fin).
+                                </p>
+                            </group>
+                            <field name="interval_ids">
+                                <tree editable="bottom">
+                                    <field name="hora_ini"/>
+                                    <field name="hora_fin"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista Plantilla de Turno -->
+    <record id="galgo_shift_template_view_list" model="ir.ui.view">
+        <field name="name">galgo.shift.template.list</field>
+        <field name="model">galgo.shift.template</field>
+        <field name="arch" type="xml">
+            <tree string="Plantillas de Turno">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="hora_ini"/>
+                <field name="hora_fin"/>
+                <field name="cruza_medianoche"/>
+                <field name="duracion_horas" widget="float_time"/>
+                <field name="color" widget="color_picker" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Búsqueda Plantilla de Turno -->
+    <record id="galgo_shift_template_view_search" model="ir.ui.view">
+        <field name="name">galgo.shift.template.search</field>
+        <field name="model">galgo.shift.template</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Plantilla de Turno">
+                <field name="name"/>
+                <field name="code"/>
+                <filter name="filter_nocturno" string="Nocturnos" domain="[('cruza_medianoche', '=', True)]"/>
+                <filter name="filter_diurno" string="Diurnos" domain="[('cruza_medianoche', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción Plantilla de Turno -->
+    <record id="galgo_shift_template_action" model="ir.actions.act_window">
+        <field name="name">Plantillas de Turno</field>
+        <field name="res_model">galgo.shift.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear una plantilla de turno nueva
+            </p>
+        </field>
+    </record>
+</odoo>

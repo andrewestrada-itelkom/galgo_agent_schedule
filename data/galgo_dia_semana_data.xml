@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Días de la semana -->
+        <record id="galgo_dia_lun" model="galgo.dia.semana">
+            <field name="name">Lunes</field>
+            <field name="code">0</field>
+            <field name="secuencia">1</field>
+        </record>
+        <record id="galgo_dia_mar" model="galgo.dia.semana">
+            <field name="name">Martes</field>
+            <field name="code">1</field>
+            <field name="secuencia">2</field>
+        </record>
+        <record id="galgo_dia_mie" model="galgo.dia.semana">
+            <field name="name">Miércoles</field>
+            <field name="code">2</field>
+            <field name="secuencia">3</field>
+        </record>
+        <record id="galgo_dia_jue" model="galgo.dia.semana">
+            <field name="name">Jueves</field>
+            <field name="code">3</field>
+            <field name="secuencia">4</field>
+        </record>
+        <record id="galgo_dia_vie" model="galgo.dia.semana">
+            <field name="name">Viernes</field>
+            <field name="code">4</field>
+            <field name="secuencia">5</field>
+        </record>
+        <record id="galgo_dia_sab" model="galgo.dia.semana">
+            <field name="name">Sábado</field>
+            <field name="code">5</field>
+            <field name="secuencia">6</field>
+        </record>
+        <record id="galgo_dia_dom" model="galgo.dia.semana">
+            <field name="name">Domingo</field>
+            <field name="code">6</field>
+            <field name="secuencia">7</field>
+        </record>
+    </data>
+</odoo>
