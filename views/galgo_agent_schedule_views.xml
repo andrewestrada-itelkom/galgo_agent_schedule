@@ -13,7 +13,7 @@
                       color="color"
                       mode="month"
                       event_open_popup="True"
-                      quick_add="True">
+                      quick_add="False">
                 <field name="agent_id" filters="1"/>
                 <field name="shift_id" filters="1"/>
                 <field name="area_id" filters="1"/>
