@@ -88,12 +88,12 @@ class GalgoAgentSchedule(models.Model):
     def create(self, vals_list):
         """Override create to generate interval_ids from shift template.
 
-        Todos los turnos tienen intervalos (1 o más). Se leen desde
-        shift_id.interval_ids y se crean como interval_ids del schedule.
+        Siempre se generan desde la plantilla (se ignora cualquier interval_ids
+        que venga del onchange — solo tiene hora_ini/hora_fin sin agent_id/shift_id).
         """
         for vals in vals_list:
             shift_id = vals.get("shift_id")
-            if shift_id and not vals.get("interval_ids"):
+            if shift_id:
                 shift = self.env["galgo.shift.template"].browse(shift_id)
                 agent_id = vals.get("agent_id")
                 if shift.interval_ids:
