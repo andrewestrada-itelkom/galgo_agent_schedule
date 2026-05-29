@@ -457,5 +457,11 @@ curl "http://localhost:8069/galgo/schedule/areas"
 
 ---
 
-*Document version: 1.0 — Mayo 2026*
-*Last updated: 2026-05-29 after fixing default_date context bug*
+*Document version: 1.1 — Mayo 2026*
+*Last updated: 2026-05-29*
+- Fixed `default_date` context bug (wrong date on calendar click)
+- Fixed `create()` always regenerates intervals from template
+- Fixed calendar click opens full form (not quick-add popup)
+- Verified: calendar displays correctly with month view
+- Verified: clicking day opens form with correct date pre-poblated
+- Verified: admin password reset to G@br13ll40921
